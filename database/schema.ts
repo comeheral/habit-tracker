@@ -7,6 +7,36 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class HabitLogSchema extends BaseModel {
+  static $columns = ['id', 'date', 'isCompleted', 'createdAt', 'updatedAt'] as const
+  $columns = HabitLogSchema.$columns
+  @column({ isPrimary: true })
+  declare id: number
+  @column.date()
+  declare date: DateTime
+  @column()
+  declare isCompleted: boolean | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class HabitSchema extends BaseModel {
+  static $columns = ['id', 'name', 'deletedAt', 'createdAt', 'updatedAt'] as const
+  $columns = HabitSchema.$columns
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['id', 'fullName', 'email', 'password', 'createdAt', 'updatedAt'] as const
   $columns = UserSchema.$columns
