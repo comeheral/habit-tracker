@@ -8,7 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class HabitLogSchema extends BaseModel {
-  static $columns = ['id', 'date', 'isCompleted', 'createdAt', 'updatedAt'] as const
+  static $columns = ['id', 'date', 'isCompleted', 'createdAt', 'updatedAt', 'userId', 'habitId'] as const
   $columns = HabitLogSchema.$columns
   @column({ isPrimary: true })
   declare id: number
@@ -20,10 +20,14 @@ export class HabitLogSchema extends BaseModel {
   declare createdAt: DateTime
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+  @column()
+  declare habitId: number
 }
 
 export class HabitSchema extends BaseModel {
-  static $columns = ['id', 'name', 'deletedAt', 'createdAt', 'updatedAt'] as const
+  static $columns = ['id', 'name', 'deletedAt', 'createdAt', 'updatedAt', 'userId'] as const
   $columns = HabitSchema.$columns
   @column({ isPrimary: true })
   declare id: number
@@ -35,6 +39,8 @@ export class HabitSchema extends BaseModel {
   declare createdAt: DateTime
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
 }
 
 export class UserSchema extends BaseModel {

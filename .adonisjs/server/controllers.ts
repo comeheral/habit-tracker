@@ -4,8 +4,8 @@
  */
 
 export const controllers = {
+  HabitLogs: () => import('#controllers/habit_logs_controller'),
+  Habits: () => import('#controllers/habits_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Session: () => import('#controllers/session_controller'),
-  Habits: () => import('#controllers/habits_controller'),
-  HabitLogs: () => import('#controllers/habit_logs_controller'),
 }
