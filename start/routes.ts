@@ -28,3 +28,5 @@ router
     router.post('logout', [controllers.Session, 'destroy'])
   })
   .use(middleware.auth())
+
+router.get('/habits', [controllers.Habits, 'index'])

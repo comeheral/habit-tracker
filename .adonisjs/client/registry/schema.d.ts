@@ -73,4 +73,15 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/session_controller').default['destroy']>>>
     }
   }
+  'habits.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/habits'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/habits_controller').default['index']>>>
+    }
+  }
 }
