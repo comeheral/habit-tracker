@@ -29,4 +29,4 @@ router
   })
   .use(middleware.auth())
 
-router.get('/habits', [controllers.Habits, 'index'])
+router.get('/habits', [controllers.Habits, 'index']).use(middleware.auth())
