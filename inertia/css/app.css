@@ -5,5 +5,5 @@
 
 /* DaisyUI */
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
+  themes: bumblebee --default, dark --prefersdark;
 }
