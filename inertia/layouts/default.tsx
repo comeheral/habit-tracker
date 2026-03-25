@@ -15,34 +15,27 @@ export default function Layout({ children }: { children: ReactElement<Data.Share
 
   return (
     <div className="max-w-xl m-auto p-8">
-      <header>
-        <nav className="flex items-center justify-between">
-          <ul className="menu menu-horizontal bg-base-200 rounded-lg">
-            <li><Link route="home">Home</Link></li>
-            <li><Link route="habits.index">Habits</Link></li>
-          </ul>
-          <div className="flex items-center gap-2">
-            {children.props.user ? (
-              <>
-                <div className="avatar avatar-placeholder">
-                  <div className="bg-neutral text-neutral-content w-8 rounded-box">
-                    <span className="text-xs">{children.props.user.initials}</span>
-                  </div>
-                </div>
-                <Form route="session.destroy">
-                  <button className="btn btn-primary" type="submit">Logout</button>
-                </Form>
-              </>
-            ) : (
-              <>
-                <Link route="new_account.create">Signup</Link>
-                <Link route="session.create">Login</Link>
-              </>
-            )}
-          </div>
-        </nav>
-      </header>
-      <main className="mt-8">{children}</main>
+      {children.props.user && (
+        <header className="mb-8">
+          <nav className="flex items-center justify-between">
+            <ul className="menu menu-horizontal bg-base-200 rounded-lg">
+              <li><Link route="home">Home</Link></li>
+              <li><Link route="habits.index">Habits</Link></li>
+            </ul>
+            <div className="flex items-center gap-2">
+            <div className="avatar avatar-placeholder">
+              <div className="bg-neutral text-neutral-content w-8 rounded-box">
+                <span className="text-xs">{children.props.user.initials}</span>
+              </div>
+            </div>
+            <Form route="session.destroy">
+              <button className="btn btn-tertiary" type="submit">Logout</button>
+            </Form>
+            </div>
+          </nav>
+        </header>
+      )}
+      <main>{children}</main>
       <Toaster position="top-center" richColors />
     </div>
   )
