@@ -5,7 +5,7 @@ export default function Login() {
     <div className="form-container">
       <div>
         <h1 className="text-2xl font-bold mb-4">Login</h1>
-        <p className="text-sm text-base-content mb-4">Enter your details below to login to your account</p>
+        <p className="text-sm text-base-content mb-8">Enter your details below to login to your account</p>
       </div>
 
       <div>
@@ -39,7 +39,6 @@ export default function Login() {
               </div>
 
               <button type="submit" className="btn btn-primary w-full mt-4">Login</button>
-
 
               <p className="text-sm text-center text-neutral mt-4">Don't have an account ? <Link route="new_account.create" className="underline">Sign up</Link></p>
             </>
