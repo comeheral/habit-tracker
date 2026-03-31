@@ -10,11 +10,8 @@ import HabitLog from '#models/habit_log'
 
 export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   get initials() {
-    const [first, last] = this.fullName ? this.fullName.split(' ') : this.email.split('@')
-    if (first && last) {
-      return `${first.charAt(0)}${last.charAt(0)}`.toUpperCase()
-    }
-    return `${first.slice(0, 2)}`.toUpperCase()
+    const name = this.firstName || ''
+    return name.charAt(0).toUpperCase()
   }
 
   @hasMany(() => Habit)

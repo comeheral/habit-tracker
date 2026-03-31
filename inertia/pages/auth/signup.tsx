@@ -20,9 +20,9 @@ export default function Signup() {
                       <circle cx="12" cy="7" r="4"></circle>
                     </g>
                   </svg>
-                  <input type="text" name="fullName" id="fullName" placeholder="Full name" required data-invalid={errors.fullName ? 'true' : undefined} />
+                  <input type="text" name="firstName" id="firstName" placeholder="First name" required data-invalid={errors.firstName ? 'true' : undefined} />
                 </label>
-                {errors.fullName && <div>{errors.fullName}</div>}
+                {errors.firstName && <div>{errors.firstName}</div>}
               </div>
 
               <div className="mb-4">
