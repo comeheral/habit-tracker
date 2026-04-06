@@ -30,3 +30,4 @@ router
   .use(middleware.auth())
 
 router.get('/habits', [controllers.Habits, 'index']).use(middleware.auth())
+router.post('/habits', [controllers.Habits, 'store'])

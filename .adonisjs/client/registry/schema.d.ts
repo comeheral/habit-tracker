@@ -84,4 +84,15 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/habits_controller').default['index']>>>
     }
   }
+  'habits.store': {
+    methods: ["POST"]
+    pattern: '/habits'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/habits_controller').default['store']>>>
+    }
+  }
 }

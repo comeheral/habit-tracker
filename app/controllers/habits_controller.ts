@@ -9,4 +9,15 @@ export default class HabitsController {
       habits: HabitTransformer.transform(habits)
     })
   }
+
+  async store({ request, auth, response }: HttpContext){
+    const data = request.only(['name']) // Get only the name since this is the only useful data - more secure than request.all()
+
+   await Habit.create({
+      ...data,
+      userId: auth.user!.id
+    })
+
+    return response.redirect().toRoute('habits.index')
+  }
 }

@@ -48,6 +48,12 @@ const routes = {
     tokens: [{"old":"/habits","type":0,"val":"habits","end":""}],
     types: placeholder as Registry['habits.index']['types'],
   },
+  'habits.store': {
+    methods: ["POST"],
+    pattern: '/habits',
+    tokens: [{"old":"/habits","type":0,"val":"habits","end":""}],
+    types: placeholder as Registry['habits.store']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }
