@@ -1,6 +1,5 @@
 import type { InertiaProps } from '~/types'
 import type { Data } from '@generated/data'
-import { toast } from 'sonner'
 import { useRef } from 'react'
 import { Form } from '@adonisjs/inertia/react'
 import { FormComponentRef } from '@inertiajs/core'
@@ -20,9 +19,8 @@ export default function Index({ habits }: PageProps) {
     }, 300)
   }
 
-  const handleSuccess = () => {
+  const handleFinish = () => {
     closeModal();
-    toast.success('New habit added!');
   }
 
   return (
@@ -40,7 +38,7 @@ export default function Index({ habits }: PageProps) {
       <dialog id="add_modal" className="modal">
         <div className="modal-box">
           <h2 className="font-bold text-lg mb-4">Add a habit</h2>
-          <Form ref={formRef} route="habits.store" options={{ preserveScroll: true, preserveState: true, preserveUrl: true}} onSuccess={handleSuccess}>
+          <Form ref={formRef} route="habits.store" options={{ preserveScroll: true }} onFinish={handleFinish}>
             {({ errors }) => (
               <>
                 <input type="text" name="name" id="name" placeholder="Habit name" required className="input" />

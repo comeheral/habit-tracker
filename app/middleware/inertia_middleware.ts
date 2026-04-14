@@ -16,12 +16,21 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
     const { session, auth } = ctx as Partial<HttpContext>
 
     /**
-     * Fetching the first error from the flash messages
+     * Fetching the first error from the flash messages (from errorsBag)
      */
     const errorsBag = session?.flashMessages.get('errorsBag') ?? {}
-    const error: string | undefined = Object.keys(errorsBag)
+    const errorBagMessage: string | undefined = Object.keys(errorsBag)
       .filter((code) => code !== 'E_VALIDATION_ERROR')
       .map((code) => errorsBag[code])[0]
+
+    /**
+     * Fetching custom flash messages
+     */
+    const customError: string | undefined = session?.flashMessages.get('error')
+    const success: string | undefined = session?.flashMessages.get('success')
+
+    // Prioritize custom error over errorBag error
+    const error = customError || errorBagMessage
 
     /**
      * Data shared with all Inertia pages. Make sure you are using
@@ -31,6 +40,7 @@ export default class InertiaMiddleware extends BaseInertiaMiddleware {
       errors: ctx.inertia.always(this.getValidationErrors(ctx)),
       flash: ctx.inertia.always({
         error: error,
+        success: success,
       }),
       user: ctx.inertia.always(auth?.user ? UserTransformer.transform(auth.user) : undefined),
     }

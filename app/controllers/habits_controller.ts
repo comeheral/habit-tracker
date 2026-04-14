@@ -10,14 +10,19 @@ export default class HabitsController {
     })
   }
 
-  async store({ request, auth, response }: HttpContext){
+  async store({ request, auth, session, response }: HttpContext){
     const data = request.only(['name']) // Get only the name since this is the only useful data - more secure than request.all()
 
-   await Habit.create({
-      ...data,
-      userId: auth.user!.id
-    })
-
-    return response.redirect().toRoute('habits.index')
+    try {
+      await Habit.create({
+        ...data,
+        userId: auth.user!.id
+      })
+      session.flash('success', 'New habit added!');
+      return response.redirect().toRoute('habits.index')
+    } catch(error) {
+      session.flash('error', 'Failed to create habit. Please try again.');
+      return response.redirect().toRoute('habits.index')
+    }
   }
 }
