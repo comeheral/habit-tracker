@@ -95,4 +95,15 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/habits_controller').default['store']>>>
     }
   }
+  'habits.destroy': {
+    methods: ["DELETE"]
+    pattern: '/habits/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/habits_controller').default['destroy']>>>
+    }
+  }
 }

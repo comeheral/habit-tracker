@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Habit from '#models/habit'
 import HabitTransformer from '#transformers/habit_transformer'
+import { DateTime } from 'luxon'
 
 export default class HabitsController {
   async index({ inertia, auth }: HttpContext){
@@ -18,11 +19,21 @@ export default class HabitsController {
         ...data,
         userId: auth.user!.id
       })
-      session.flash('success', 'New habit added!');
+      session.flash('success', 'New habit added!')
       return response.redirect().toRoute('habits.index')
     } catch(error) {
-      session.flash('error', 'Failed to create habit. Please try again.');
+      session.flash('error', 'Failed to create habit. Please try again.')
       return response.redirect().toRoute('habits.index')
     }
+  }
+
+  // Soft delete
+  async destroy({ params, response }: HttpContext){
+    const habit = await Habit.findOrFail(params.id)
+
+    habit.deletedAt = DateTime.now()
+    await habit.save()
+
+    return response.redirect().back()
   }
 }

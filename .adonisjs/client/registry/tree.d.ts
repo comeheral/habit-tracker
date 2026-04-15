@@ -15,5 +15,6 @@ export interface ApiDefinition {
   habits: {
     index: typeof routes['habits.index']
     store: typeof routes['habits.store']
+    destroy: typeof routes['habits.destroy']
   }
 }
