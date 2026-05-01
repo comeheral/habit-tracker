@@ -7,17 +7,6 @@ import type { InferInput } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'home': {
-    methods: ["GET","HEAD"]
-    pattern: '/'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: unknown
-    }
-  }
   'new_account.create': {
     methods: ["GET","HEAD"]
     pattern: '/signup'
@@ -104,6 +93,17 @@ export interface Registry {
       params: { id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/habits_controller').default['destroy']>>>
+    }
+  }
+  'home': {
+    methods: ["GET","HEAD"]
+    pattern: '/:date'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { date: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/habit_logs_controller').default['index']>>>
     }
   }
 }

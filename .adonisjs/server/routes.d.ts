@@ -4,7 +4,6 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'new_account.store': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
@@ -13,18 +12,19 @@ export type ScannedRoutes = {
     'habits.index': { paramsTuple?: []; params?: {} }
     'habits.store': { paramsTuple?: []; params?: {} }
     'habits.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'home': { paramsTuple: [ParamValue]; params: {'date': ParamValue} }
   }
   GET: {
-    'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'habits.index': { paramsTuple?: []; params?: {} }
+    'home': { paramsTuple: [ParamValue]; params: {'date': ParamValue} }
   }
   HEAD: {
-    'home': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'habits.index': { paramsTuple?: []; params?: {} }
+    'home': { paramsTuple: [ParamValue]; params: {'date': ParamValue} }
   }
   POST: {
     'new_account.store': { paramsTuple?: []; params?: {} }

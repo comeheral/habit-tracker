@@ -24,7 +24,7 @@ export default function Layout({ children }: { children: ReactElement<Data.Share
         <header className="mb-8">
           <nav className="flex items-center justify-between">
             <ul className="menu menu-horizontal bg-base-200 rounded-lg">
-              <li><Link route="home">Home</Link></li>
+              <li><Link href="/">Home</Link></li>
               <li><Link route="habits.index">Habits</Link></li>
             </ul>
             <div className="flex items-center gap-2">

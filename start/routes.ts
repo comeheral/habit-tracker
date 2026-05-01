@@ -11,8 +11,14 @@ import { middleware } from '#start/kernel'
 import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
 
-router.on('/').renderInertia('home', {}).as('home').use(middleware.auth())
 
+// Home : redirect to today's date
+router.get('/', ({ response }) => {
+  const today = new Date().toISOString().split('T')[0]
+  return response.redirect().toRoute('home', { date: today })
+}).use(middleware.auth())
+
+// Auth
 router
   .group(() => {
     router.get('signup', [controllers.NewAccount, 'create'])
@@ -29,6 +35,10 @@ router
   })
   .use(middleware.auth())
 
+// Habits
 router.get('/habits', [controllers.Habits, 'index']).use(middleware.auth())
 router.post('/habits', [controllers.Habits, 'store'])
 router.delete('/habits/:id', [controllers.Habits, 'destroy'])
+
+// Habit logs - Generic path defined after the specific ones to avoid conflicting
+router.get('/:date', [controllers.HabitLogs, 'index']).as('home').use(middleware.auth())
