@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import HabitLog from '#models/habit_log'
 import Habit from '#models/habit'
+import HabitLogTransformer from '#transformers/habit_log_transformer'
 import { DateTime } from 'luxon'
 
 export default class HabitLogsController {
@@ -8,19 +9,18 @@ export default class HabitLogsController {
 
     if (!params.date || params.date.includes('favicon')) return
 
-    // TODO : Redirect to '/' if future date
+    // Redirect to today if a future date is passed as param
+    if(DateTime.fromISO(params.date) > DateTime.now().startOf('day')){
+      response.redirect().toPath('/');
+    }
 
     let habitLogs = await HabitLog.query()
       .where('user_id', auth.user!.id)
       .where('date', params.date)
       .preload('habit') // Habit details are needed for front-end display purposes
 
-    console.log('params : ', params)
-    console.log('habit logs length : ', habitLogs.length);
-
     if(habitLogs.length == 0){
       const activeHabits = await Habit.query().where('user_id', auth.user!.id).whereNull('deleted_at').orderBy('created_at', 'asc')
-      console.log('active habits : ', activeHabits)
       
       const createPayload = activeHabits.map(habit => ({
         date: params.date,
@@ -36,10 +36,8 @@ export default class HabitLogsController {
         .preload('habit') // Habit details are needed for front-end display purposes
     }
 
-    // TODO : Use a transformer to use the data in the front-end
-    
-    console.log('habit logs : ', habitLogs.length)
-
-    return inertia.render('home', { habitLogs })
+    return inertia.render('home', {
+      habitLogs: HabitLogTransformer.transform(habitLogs)
+    })
   }
 }
