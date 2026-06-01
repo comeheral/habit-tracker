@@ -106,4 +106,15 @@ export interface Registry {
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/habit_logs_controller').default['index']>>>
     }
   }
+  'habit_logs.update': {
+    methods: ["PATCH"]
+    pattern: '/habit-logs/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/habit_logs_controller').default['update']>>>
+    }
+  }
 }

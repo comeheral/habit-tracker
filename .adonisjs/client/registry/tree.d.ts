@@ -17,4 +17,7 @@ export interface ApiDefinition {
     destroy: typeof routes['habits.destroy']
   }
   home: typeof routes['home']
+  habitLogs: {
+    update: typeof routes['habit_logs.update']
+  }
 }

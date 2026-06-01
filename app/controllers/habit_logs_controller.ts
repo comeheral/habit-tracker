@@ -37,7 +37,17 @@ export default class HabitLogsController {
     }
 
     return inertia.render('home', {
-      habitLogs: HabitLogTransformer.transform(habitLogs)
+      habitLogs: HabitLogTransformer.transform(habitLogs),
+      date: params.date
     })
+  }
+
+  async update({ params, request, response}: HttpContext){
+    console.log('update : ', params.id, request.input('isChecked'))
+    const habitLog = await HabitLog.findOrFail(params.id)
+    habitLog.isCompleted = request.input('isChecked')
+    await habitLog.save()
+
+    return response.redirect().back()
   }
 }

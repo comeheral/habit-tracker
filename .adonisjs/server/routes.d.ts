@@ -13,6 +13,7 @@ export type ScannedRoutes = {
     'habits.store': { paramsTuple?: []; params?: {} }
     'habits.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'home': { paramsTuple: [ParamValue]; params: {'date': ParamValue} }
+    'habit_logs.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'new_account.create': { paramsTuple?: []; params?: {} }
@@ -34,6 +35,9 @@ export type ScannedRoutes = {
   }
   DELETE: {
     'habits.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  PATCH: {
+    'habit_logs.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

@@ -42,3 +42,4 @@ router.delete('/habits/:id', [controllers.Habits, 'destroy'])
 
 // Habit logs - Generic path defined after the specific ones to avoid conflicting
 router.get('/:date', [controllers.HabitLogs, 'index']).as('home').use(middleware.auth())
+router.patch('/habit-logs/:id', [controllers.HabitLogs, 'update'])
